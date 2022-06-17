@@ -6,17 +6,14 @@ module.exports = {
   output: {
     clean: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.html$/,
-        loader: 'html-loader',
-      },
-    ],
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/pages/index.html',
     }),
   ],
+  devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+    watchFiles: ['./src/'],
+  },
 };
