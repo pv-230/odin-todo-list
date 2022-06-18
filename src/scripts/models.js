@@ -1,10 +1,10 @@
 /**
  * Represents a todo object.
- * @param {string} t
- * @param {string} d
- * @param {string} dd
- * @param {number} p
- * @returns Public API
+ * @param {string} t Title
+ * @param {string} d Description
+ * @param {string} dd Due date
+ * @param {number} p Priority
+ * @returns Object containing public functions
  */
 const Todo = (t, d, dd, p) => {
   let title = t;
@@ -12,11 +12,18 @@ const Todo = (t, d, dd, p) => {
   let dueDate = dd;
   let priority = p;
 
+  // Getters
   const getTitle = () => title;
   const getDescription = () => description;
   const getDueDate = () => dueDate;
   const getPriorty = () => priority;
+  const getInfo = () =>
+    `Title: ${title}\n` +
+    `Description: ${description}\n` +
+    `Due date: ${dueDate}\n` +
+    `Priority: ${priority}\n`;
 
+  // Setters
   const setTitle = (newTitle) => (title = newTitle);
   const setDescription = (newDescription) => (description = newDescription);
   const setDueDate = (newDueDate) => (dueDate = newDueDate);
@@ -27,6 +34,7 @@ const Todo = (t, d, dd, p) => {
     getDescription,
     getDueDate,
     getPriorty,
+    getInfo,
     setTitle,
     setDescription,
     setDueDate,
@@ -36,19 +44,22 @@ const Todo = (t, d, dd, p) => {
 
 /**
  * Represents a project object.
- * @param {string} t
- * @param {string} d
- * @returns Public API
+ * @param {string} t Title
+ * @param {string} d Description
+ * @returns Object containing public functions
  */
 const Project = (t, d) => {
   let title = typeof t === 'string' ? t : 'Default';
   let description = typeof t === 'string' ? d : 'This is the default project.';
   const todos = [];
 
+  // Getters
   const getTitle = () => title;
   const getDescription = () => description;
   const getTodos = () => [...todos];
+  const getInfo = () => `Title: ${title}\nDescription: ${description}\n`;
 
+  // Setters
   const setTitle = (newTitle) => (title = newTitle);
   const setDescription = (newDescription) => (description = newDescription);
 
@@ -69,6 +80,7 @@ const Project = (t, d) => {
     getTitle,
     getDescription,
     getTodos,
+    getInfo,
     setTitle,
     setDescription,
     addTodo,

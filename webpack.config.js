@@ -9,11 +9,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/pages/index.html',
+      favicon: './src/images/favicon.ico',
     }),
   ],
   devtool: 'inline-source-map',
-  devServer: {
-    static: './dist',
-    watchFiles: ['./src/'],
-  },
 };
