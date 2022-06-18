@@ -2,14 +2,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/scripts/index.js',
+  entry: './src/index.js',
   output: {
     clean: true,
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/pages/index.html',
-      favicon: './src/images/favicon.ico',
+      template: './src/index.html',
+      favicon: './src/assets/images/favicon.ico',
     }),
   ],
   devtool: 'inline-source-map',

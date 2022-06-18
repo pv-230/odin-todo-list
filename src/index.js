@@ -1,4 +1,7 @@
-import { Todo, Project } from './models';
+import './reset.css';
+import './index.css';
+import Todo from './models/todo';
+import Project from './models/project';
 
 console.log('Creating new project and adding todos...');
 const todo = Todo('Todo #1', 'This is Todo #1', '2022-07-01', 1);
