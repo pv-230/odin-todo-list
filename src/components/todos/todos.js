@@ -1,3 +1,5 @@
+import './todos.css';
+
 /**
  * Represents a todo object.
  * @param {string} t Title

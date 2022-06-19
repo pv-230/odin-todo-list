@@ -1,3 +1,5 @@
+import './projects.css';
+
 /**
  * Represents a project object.
  * @param {string} t Title
