@@ -1,2 +1,3 @@
-import './reset.css';
-import './components/main-content/main-content';
+import * as mainContent from './components/main-content/main-content';
+
+mainContent.loadContent();

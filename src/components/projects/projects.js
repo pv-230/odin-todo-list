@@ -1,49 +1,33 @@
 import './projects.css';
+import Project from '../../models/Project';
 
-/**
- * Represents a project object.
- * @param {string} t Title
- * @param {string} d Description
- * @returns Object containing public functions
- */
-const Project = (t, d) => {
-  let title = typeof t === 'string' ? t : 'Default';
-  let description = typeof t === 'string' ? d : 'This is the default project.';
-  const todos = [];
-
-  // Getters
-  const getTitle = () => title;
-  const getDescription = () => description;
-  const getTodos = () => [...todos];
-  const getInfo = () => `Title: ${title}\nDescription: ${description}\n`;
-
-  // Setters
-  const setTitle = (newTitle) => (title = newTitle);
-  const setDescription = (newDescription) => (description = newDescription);
-
-  // Adds a todo object to the list.
-  const addTodo = (todoItem) => todos.push(todoItem);
-
-  // Removes a todo object from the list.
-  const removeTodo = (todoItem) => {
-    const tdIndex = todos.findIndex((td) => td === todoItem);
-
-    if (tdIndex >= 0) {
-      // Todo object was found in list
-      todos.splice(tdIndex, 1);
-    }
-  };
-
-  return {
-    getTitle,
-    getDescription,
-    getTodos,
-    getInfo,
-    setTitle,
-    setDescription,
-    addTodo,
-    removeTodo,
-  };
+const state = {
+  projArr: [], // Stores all projects
+  currentProj: null, // Currently selected project by index
 };
 
-export default Project;
+const displayProjList = () => {
+  const projectsList = document.querySelector('.projects__list');
+
+  while (projectsList.firstChild) {
+    projectsList.removeChild(projectsList.lastChild);
+  }
+
+  state.projArr.forEach((proj) => {
+    const listItem = document.createElement('div');
+    listItem.classList.add('projects__item');
+    listItem.textContent = proj.getTitle(); // TODO: Temp info display
+    projectsList.appendChild(listItem);
+  });
+};
+
+const addProject = () => {
+  state.projArr.push(Project());
+  displayProjList();
+};
+
+// Add project event
+const addBtn = document.querySelector('.projects__add-btn');
+addBtn.addEventListener('click', addProject);
+
+export { displayProjList };
