@@ -1,18 +1,36 @@
 .projects {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   flex-shrink: 0;
-  border: 1px solid red;
   width: 250px;
+  border-right: 1px solid black;
+}
+
+.projects button {
+  cursor: pointer;
+}
+
+.projects__main-title {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 8px 0;
+  border-bottom: 1px solid gray;
 }
 
 .projects__list {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 8px 0;
 }
 
 .projects__item {
-  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.projects__item:hover {
+  background-color: azure;
+  cursor: pointer;
 }

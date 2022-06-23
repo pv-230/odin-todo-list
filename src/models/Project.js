@@ -7,40 +7,40 @@
 const Project = (t, d) => {
   let title = typeof t === 'string' ? t : 'Default';
   let description = typeof t === 'string' ? d : 'This is the default project.';
-  const todos = [];
+  const tasks = [];
 
   // Getters
   const getTitle = () => title;
   const getDescription = () => description;
-  const getTodos = () => [...todos];
+  const getTasks = () => [...tasks];
   const getInfo = () => `Title: ${title}\nDescription: ${description}\n`;
 
   // Setters
   const setTitle = (newTitle) => (title = newTitle);
   const setDescription = (newDescription) => (description = newDescription);
 
-  // Adds a todo object to the list.
-  const addTodo = (todoItem) => todos.push(todoItem);
+  // Adds a task object to the list.
+  const addTask = (taskItem) => tasks.push(taskItem);
 
-  // Removes a todo object from the list.
-  const removeTodo = (todoItem) => {
-    const tdIndex = todos.findIndex((td) => td === todoItem);
+  // Removes a task object from the list.
+  const removeTask = (taskItem) => {
+    const tdIndex = tasks.findIndex((td) => td === taskItem);
 
     if (tdIndex >= 0) {
-      // Todo object was found in list
-      todos.splice(tdIndex, 1);
+      // Task object was found in list
+      tasks.splice(tdIndex, 1);
     }
   };
 
   return {
     getTitle,
     getDescription,
-    getTodos,
+    getTasks,
     getInfo,
     setTitle,
     setDescription,
-    addTodo,
-    removeTodo,
+    addTask,
+    removeTask,
   };
 };
 

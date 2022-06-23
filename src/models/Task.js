@@ -6,7 +6,7 @@
  * @param {number} p Priority
  * @returns Object containing public functions
  */
-const Todo = (t, d, dd, p) => {
+const Task = (t, d, dd, p) => {
   let title = t;
   let description = d;
   let dueDate = dd;
@@ -42,4 +42,4 @@ const Todo = (t, d, dd, p) => {
   };
 };
 
-export default Todo;
+export default Task;
