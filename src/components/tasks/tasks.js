@@ -1,24 +1,35 @@
 import './tasks.css';
 
-const displayTaskList = (proj) => {
-  const tasksList = document.querySelector('.tasks__list');
+/**
+ * Displays all tasks for a project and show project info.
+ * @param {Object} state
+ */
+const displayTaskList = (state) => {
+  const currentProject = state.projArr[state.currentProj];
 
+  const projectTitle = document.querySelector('.tasks__project-title');
+  projectTitle.textContent = currentProject.getTitle();
+
+  const projectDescrip = document.querySelector('.tasks__project-descrip');
+  projectDescrip.textContent = currentProject.getDescription();
+
+  const tasksList = document.querySelector('.tasks__list');
   while (tasksList.firstChild) {
     tasksList.removeChild(tasksList.lastChild);
   }
 
-  let listItem;
-  if (proj.getTasks().length === 0) {
-    listItem = document.createElement('div');
-    listItem.classList.add('tasks__item');
-    listItem.textContent = 'No tasks.';
-    tasksList.appendChild(listItem);
+  let item;
+  if (currentProject.getTasks().length === 0) {
+    item = document.createElement('div');
+    item.classList.add('tasks__item');
+    item.textContent = 'No tasks.';
+    tasksList.appendChild(item);
   } else {
-    proj.getTasks().forEach((task) => {
-      listItem = document.createElement('div');
-      listItem.classList.add('tasks__item');
-      listItem.textContent = task.getTitle();
-      tasksList.appendChild(listItem);
+    currentProject.getTasks().forEach((task) => {
+      item = document.createElement('div');
+      item.classList.add('tasks__item');
+      item.textContent = task.getTitle();
+      tasksList.appendChild(item);
     });
   }
 };

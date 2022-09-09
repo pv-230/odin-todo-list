@@ -1,6 +1,30 @@
+@font-face {
+  font-family: 'RobotoRegular';
+  src: url('../../assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+:root {
+  --project-info-bg: #b7b0ff;
+}
+
 .tasks {
   width: 100%;
-  padding: 16px;
+}
+
+.tasks__project-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  height: 100px;
+  background-color: var(--project-info-bg);
+  font-family: RobotoRegular;
+  border-bottom: 1px solid gray;
+}
+
+.tasks__project-title {
+  font-size: 48px;
 }
 
 .tasks__list {

@@ -1,36 +1,117 @@
+@font-face {
+  font-family: 'RobotoRegular';
+  src: url('../../assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+:root {
+  --sidebar-bg: #eeeeee;
+  --sidebar-selected: #b1b1b1;
+  --sidebar-hover: #dadada;
+}
+
 .projects {
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
-  width: 250px;
-  border-right: 1px solid black;
+  width: 400px;
+  box-shadow: 4px 0px 8px gray;
+  font-family: 'RobotoRegular';
+  background-color: var(--sidebar-bg);
+  gap: 10px;
+  z-index: 1;
 }
 
-.projects button {
-  cursor: pointer;
-}
+/* Sidebar menu top */
 
-.projects__main-title {
-  text-align: center;
-  font-size: 1.5rem;
-  padding: 8px 0;
-  border-bottom: 1px solid gray;
-}
-
-.projects__list {
+.projects__title-group {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 8px 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--sidebar-selected);
 }
+
+.projects__menu-title {
+  font-size: 48px;
+}
+
+.projects__menu-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background-image: url(../../assets/images/hamburger-icon.svg);
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.projects__menu-btn:hover {
+  background-color: var(--sidebar-hover);
+}
+
+.projects__menu-icon {
+  width: 48px;
+  height: 48px;
+}
+
+/* Sidebar items */
 
 .projects__item {
   display: flex;
   justify-content: space-between;
-  padding: 8px;
+  align-items: center;
+  padding: 5px 20px;
+  font-family: RobotoRegular;
 }
 
-.projects__item:hover {
-  background-color: azure;
-  cursor: pointer;
+.projects__item_selected {
+  background-color: var(--sidebar-selected);
+}
+
+.projects__item-title {
+  font-size: 32px;
+}
+
+.projects__delete-btn {
+  width: 48px;
+  height: 48px;
+  background-image: url(../../assets/images/delete-outline.svg);
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.projects__delete-btn:hover {
+  background-color: var(--sidebar-hover);
+}
+
+/* Sidebar new item input */
+
+.projects__new-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  font-family: RobotoRegular;
+}
+
+.projects__new-item-input {
+  border: none;
+  background-color: #dddddd;
+  width: 200px;
+  height: 32px;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 0 5px;
+}
+
+.projects__add-btn {
+  width: 48px;
+  height: 48px;
+  background-image: url(../../assets/images/plus.svg);
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.projects__add-btn:hover {
+  background-color: var(--sidebar-hover);
 }
