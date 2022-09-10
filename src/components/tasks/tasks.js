@@ -22,7 +22,8 @@ const displayTaskList = (state) => {
   if (currentProject.getTasks().length === 0) {
     item = document.createElement('div');
     item.classList.add('tasks__item');
-    item.textContent = 'No tasks.';
+    item.classList.add('tasks__item_no-tasks');
+    item.textContent = 'You have no tasks.';
     tasksList.appendChild(item);
   } else {
     currentProject.getTasks().forEach((task) => {

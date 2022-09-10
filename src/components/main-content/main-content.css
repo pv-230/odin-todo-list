@@ -1,5 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 .main-content {
   display: flex;
   width: 100vw;
   height: 100vh;
+}
+
+button:hover {
+  cursor: pointer;
 }

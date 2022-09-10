@@ -16,8 +16,7 @@ const displayProjList = (state) => {
     const listItem = document.createElement('li');
     listItem.classList.add('projects__item');
 
-    console.log(`index: ${i}`);
-
+    // Highlight selected project
     if (i === state.currentProj) {
       listItem.classList.add('projects__item_selected');
     }

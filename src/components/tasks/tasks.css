@@ -5,10 +5,18 @@
 
 :root {
   --project-info-bg: #b7b0ff;
+  --tasks-bg: #d9d9d9;
+  --task-item-bg: #eeeeee;
+  --add-task-btn: rgb(87, 255, 36);
+  --add-task-btn-hover: rgb(54, 233, 0);
+
+  --info-bar-height: 150px;
 }
 
 .tasks {
   width: 100%;
+  background-color: var(--tasks-bg);
+  font-family: RobotoRegular;
 }
 
 .tasks__project-info {
@@ -17,9 +25,8 @@
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  height: 100px;
+  height: var(--info-bar-height);
   background-color: var(--project-info-bg);
-  font-family: RobotoRegular;
   border-bottom: 1px solid gray;
 }
 
@@ -27,8 +34,52 @@
   font-size: 48px;
 }
 
-.tasks__list {
+.tasks__view {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  height: calc(100vh - var(--info-bar-height));
+  overflow: auto;
+}
+
+.tasks__add-task-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--add-task-btn);
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+
+.tasks__add-task-btn:hover {
+  background-color: var(--add-task-btn-hover);
+}
+
+.tasks__add-task-text {
+  font-size: 18px;
+}
+
+.tasks__list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
+  width: 100%;
+}
+
+.tasks__item {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--task-item-bg);
+}
+
+.tasks__item_no-tasks {
+  text-align: center;
+  width: fit-content;
 }

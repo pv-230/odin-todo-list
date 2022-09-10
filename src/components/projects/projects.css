@@ -4,15 +4,19 @@
 }
 
 :root {
+  /* Colors */
   --sidebar-bg: #eeeeee;
   --sidebar-selected: #b1b1b1;
   --sidebar-hover: #dadada;
+
+  /* Sizes */
+  --sidebar-width: 400px;
 }
 
 .projects {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: var(--sidebar-width);
   box-shadow: 4px 0px 8px gray;
   font-family: 'RobotoRegular';
   background-color: var(--sidebar-bg);
@@ -47,6 +51,7 @@
 
 .projects__menu-btn:hover {
   background-color: var(--sidebar-hover);
+  cursor: pointer;
 }
 
 .projects__menu-icon {
@@ -82,6 +87,7 @@
 
 .projects__delete-btn:hover {
   background-color: var(--sidebar-hover);
+  cursor: pointer;
 }
 
 /* Sidebar new item input */
@@ -114,4 +120,5 @@
 
 .projects__add-btn:hover {
   background-color: var(--sidebar-hover);
+  cursor: pointer;
 }
