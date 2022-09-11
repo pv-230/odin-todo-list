@@ -11,4 +11,5 @@ const state = {
 };
 
 projects.displayProjList(state);
+tasks.displayProjectInfo(state);
 tasks.displayTaskList(state);
