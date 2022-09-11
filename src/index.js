@@ -1,6 +1,6 @@
 import './index.html';
 import './reset.css';
-import './components/main-content/main-content';
+import './index.css';
 import * as projects from './components/projects/projects';
 import * as tasks from './components/tasks/tasks';
 import Project from './models/Project';
@@ -10,6 +10,9 @@ const state = {
   currentProj: 0, // Currently selected project by index
 };
 
+const getCurrentProj = () => state.projArr[state.currentProj];
+
 projects.displayProjList(state);
-tasks.displayProjectInfo(state);
-tasks.displayTaskList(state);
+tasks.initTasks(state);
+
+export { getCurrentProj };

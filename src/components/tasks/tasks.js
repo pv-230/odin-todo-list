@@ -1,10 +1,12 @@
 import './tasks.css';
+import Task from '../../models/Task';
+
+let state = null;
 
 /**
  * Displays project info for the currently selected project.
- * @param {Object} state
  */
-const displayProjectInfo = (state) => {
+const displayProjectInfo = () => {
   const currentProject = state.projArr[state.currentProj];
 
   const projectTitle = document.querySelector('.tasks__project-title');
@@ -16,16 +18,17 @@ const displayProjectInfo = (state) => {
 
 /**
  * Displays all tasks for a project and show project info.
- * @param {Object} state
  */
-const displayTaskList = (state) => {
+const displayTaskList = () => {
   const currentProject = state.projArr[state.currentProj];
 
+  // Clears all tasks from the display
   const tasksList = document.querySelector('.tasks__list');
   while (tasksList.firstChild) {
     tasksList.removeChild(tasksList.lastChild);
   }
 
+  // Repopulates the task list
   let item;
   if (currentProject.getTasks().length === 0) {
     item = document.createElement('div');
@@ -43,52 +46,105 @@ const displayTaskList = (state) => {
   }
 };
 
-const displayNewTaskForm = () => {
+/**
+ * Initializes the task view.
+ * @param {Object} s App state.
+ */
+const initTasks = (s) => {
+  state = s;
+  displayProjectInfo();
+  displayTaskList();
+};
+
+/**
+ * Closes the input form for new tasks.
+ */
+const closeNewTask = () => {
+  const addTaskBtn = document.querySelector('.tasks__add-task-btn');
+  addTaskBtn.classList.remove('hidden');
+
+  const newTaskInputs = document.querySelector('.new-task__inputs');
+  newTaskInputs.remove();
+};
+
+/**
+ * Adds the new task to the current project.
+ */
+const addNewTask = () => {
+  const title = document.querySelector('.new-task__title').value;
+  const descrip = document.querySelector('.new-task__description').value;
+  const date = document.querySelector('.new-task__date').value;
+
+  state.projArr[state.currentProj].addTask(Task(title, descrip, date, 1));
+  closeNewTask();
+  displayTaskList();
+};
+
+/**
+ * Shows a card where the user can enter information about a new task.
+ */
+const displayNewTask = () => {
+  const addTaskBtn = document.querySelector('.tasks__add-task-btn');
+  addTaskBtn.classList.add('hidden');
+
   // Parent and reference nodes
   const taskView = document.querySelector('.tasks__view');
   const taskList = document.querySelector('.tasks__list');
 
   // Parent container for the task options
-  const newTaskForm = document.createElement('form');
-  newTaskForm.classList.add('tasks__item');
-  newTaskForm.classList.add('tasks__item_form');
+  const newTask = document.createElement('div');
+  newTask.classList.add('tasks__item');
+  newTask.classList.add('new-task__inputs');
 
+  // Title input
   const newTaskTitle = document.createElement('input');
-  newTaskTitle.classList.add('item-form__title');
+  newTaskTitle.classList.add('new-task__title');
   newTaskTitle.setAttribute('type', 'text');
   newTaskTitle.setAttribute('required', true);
   newTaskTitle.setAttribute('placeholder', 'Enter title');
 
+  // Description input
   const newTaskDescription = document.createElement('input');
-  newTaskDescription.classList.add('item-form__description');
+  newTaskDescription.classList.add('new-task__description');
   newTaskDescription.setAttribute('type', 'text');
   newTaskDescription.setAttribute('placeholder', 'Enter description');
 
+  // Due date input
   const newTaskDate = document.createElement('input');
-  newTaskDate.classList.add('item-form__date');
+  newTaskDate.classList.add('new-task__date');
   newTaskDate.setAttribute('type', 'date');
 
+  // Priority input
+  const newTaskPriority = document.createElement('input');
+  newTaskPriority.classList.add('new-task__prio');
+  newTaskPriority.setAttribute('type', 'number');
+
+  // Confirmation button
   const acceptBtn = document.createElement('button');
   acceptBtn.classList.add('item__accept-btn');
   acceptBtn.setAttribute('type', 'button');
   acceptBtn.textContent = 'Accept';
+  acceptBtn.addEventListener('click', addNewTask);
 
+  // Cancel button
   const cancelBtn = document.createElement('button');
   cancelBtn.classList.add('item__cancel-btn');
   cancelBtn.setAttribute('type', 'button');
   cancelBtn.textContent = 'Cancel';
+  cancelBtn.addEventListener('click', closeNewTask);
 
-  newTaskForm.appendChild(newTaskTitle);
-  newTaskForm.appendChild(newTaskDescription);
-  newTaskForm.appendChild(newTaskDate);
-  newTaskForm.appendChild(acceptBtn);
-  newTaskForm.appendChild(cancelBtn);
+  newTask.appendChild(newTaskTitle);
+  newTask.appendChild(newTaskDescription);
+  newTask.appendChild(newTaskDate);
+  newTask.appendChild(newTaskPriority);
+  newTask.appendChild(acceptBtn);
+  newTask.appendChild(cancelBtn);
 
-  taskView.insertBefore(newTaskForm, taskList);
+  taskView.insertBefore(newTask, taskList);
 };
 
 // Event listeners
 const addTaskBtn = document.querySelector('.tasks__add-task-btn');
-addTaskBtn.addEventListener('click', displayNewTaskForm);
+addTaskBtn.addEventListener('click', displayNewTask);
 
-export { displayTaskList, displayProjectInfo };
+export { initTasks };

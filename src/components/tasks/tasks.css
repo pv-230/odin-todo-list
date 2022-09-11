@@ -7,7 +7,7 @@
   --project-info-bg: #b7b0ff;
   --tasks-bg: #d9d9d9;
   --task-item-bg: #eeeeee;
-  --add-task-btn: rgb(87, 255, 36);
+  --add-task-btn: rgb(60, 255, 0);
   --add-task-btn-hover: rgb(54, 233, 0);
 
   --info-bar-height: 150px;
@@ -82,4 +82,8 @@
 .tasks__item_no-tasks {
   text-align: center;
   width: fit-content;
+}
+
+.hidden {
+  display: none;
 }
