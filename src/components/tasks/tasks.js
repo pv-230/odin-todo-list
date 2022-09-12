@@ -74,8 +74,17 @@ const addNewTask = () => {
   const title = document.querySelector('.new-task__title').value;
   const descrip = document.querySelector('.new-task__description').value;
   const date = document.querySelector('.new-task__date').value;
+  const priority = document.querySelector('.new-task__priority').value;
 
-  state.projArr[state.currentProj].addTask(Task(title, descrip, date, 1));
+  if (!title) {
+    const titleInput = document.querySelector('.new-task__title');
+    titleInput.classList.add('new-task__title_invalid');
+    return;
+  }
+
+  state.projArr[state.currentProj].addTask(
+    Task(title, descrip, date, priority)
+  );
   closeNewTask();
   displayTaskList();
 };
@@ -100,7 +109,6 @@ const displayNewTask = () => {
   const newTaskTitle = document.createElement('input');
   newTaskTitle.classList.add('new-task__title');
   newTaskTitle.setAttribute('type', 'text');
-  newTaskTitle.setAttribute('required', true);
   newTaskTitle.setAttribute('placeholder', 'Enter title');
 
   // Description input
@@ -115,20 +123,29 @@ const displayNewTask = () => {
   newTaskDate.setAttribute('type', 'date');
 
   // Priority input
-  const newTaskPriority = document.createElement('input');
-  newTaskPriority.classList.add('new-task__prio');
-  newTaskPriority.setAttribute('type', 'number');
+  const newTaskPriority = document.createElement('select');
+  newTaskPriority.classList.add('new-task__priority');
+  let option = document.createElement('option');
+  option.textContent = 'Select a priority level';
+  option.value = 0;
+  newTaskPriority.appendChild(option);
+  for (let i = 1; i <= 3; i += 1) {
+    option = document.createElement('option');
+    option.textContent = `${i}`;
+    option.value = i;
+    newTaskPriority.appendChild(option);
+  }
 
   // Confirmation button
   const acceptBtn = document.createElement('button');
-  acceptBtn.classList.add('item__accept-btn');
+  acceptBtn.classList.add('new-task__accept-btn');
   acceptBtn.setAttribute('type', 'button');
   acceptBtn.textContent = 'Accept';
   acceptBtn.addEventListener('click', addNewTask);
 
   // Cancel button
   const cancelBtn = document.createElement('button');
-  cancelBtn.classList.add('item__cancel-btn');
+  cancelBtn.classList.add('new-task__cancel-btn');
   cancelBtn.setAttribute('type', 'button');
   cancelBtn.textContent = 'Cancel';
   cancelBtn.addEventListener('click', closeNewTask);

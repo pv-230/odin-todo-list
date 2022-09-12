@@ -13,11 +13,15 @@
   --info-bar-height: 150px;
 }
 
+/* Parent container for tasks and current project info */
+
 .tasks {
   width: 100%;
   background-color: var(--tasks-bg);
   font-family: RobotoRegular;
 }
+
+/* Project info */
 
 .tasks__project-info {
   display: flex;
@@ -34,6 +38,8 @@
   font-size: 48px;
 }
 
+/* Parent container for task operations */
+
 .tasks__view {
   display: flex;
   flex-direction: column;
@@ -44,25 +50,34 @@
   overflow: auto;
 }
 
+/* Add task button */
+
 .tasks__add-task-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
-  border-radius: 50%;
+  border-radius: 5px;
   background-color: var(--add-task-btn);
-  width: 48px;
+  width: fit-content;
   height: 48px;
   padding: 0;
+  padding-right: 10px;
 }
 
 .tasks__add-task-btn:hover {
   background-color: var(--add-task-btn-hover);
 }
 
+.tasks__add-task-icon {
+  height: 80%;
+}
+
 .tasks__add-task-text {
   font-size: 18px;
 }
+
+/* Task list and items */
 
 .tasks__list {
   flex: 1;
@@ -77,12 +92,83 @@
   border-radius: 5px;
   padding: 10px;
   background-color: var(--task-item-bg);
+  width: 100%;
 }
 
 .tasks__item_no-tasks {
   text-align: center;
   width: fit-content;
 }
+
+/* New task inputs */
+
+.new-task__inputs {
+  display: grid;
+  width: fit-content;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 5px;
+}
+
+.new-task__title {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.new-task__title_invalid {
+  border: 1px solid red;
+}
+
+.new-task__description {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.new-task__date {
+  border: 1px solid black;
+  border-radius: 5px;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.new-task__priority {
+  border: 1px solid black;
+  border-radius: 5px;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.new-task__accept-btn {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(0, 231, 0);
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.new-task__accept-btn:hover {
+  background-color: rgb(0, 201, 0);
+}
+
+.new-task__cancel-btn {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(255, 107, 107);
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.new-task__cancel-btn:hover {
+  background-color: rgb(255, 88, 88);
+}
+
+/* Used to hide elements */
 
 .hidden {
   display: none;
