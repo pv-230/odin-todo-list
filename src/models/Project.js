@@ -23,13 +23,8 @@ const Project = (t, d) => {
   const addTask = (taskItem) => tasks.push(taskItem);
 
   // Removes a task object from the list.
-  const removeTask = (taskItem) => {
-    const tdIndex = tasks.findIndex((td) => td === taskItem);
-
-    if (tdIndex >= 0) {
-      // Task object was found in list
-      tasks.splice(tdIndex, 1);
-    }
+  const removeTask = (index) => {
+    tasks.splice(index, 1);
   };
 
   return {

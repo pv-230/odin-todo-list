@@ -32,17 +32,16 @@ const displayTaskList = () => {
   let item;
   if (currentProject.getTasks().length === 0) {
     item = document.createElement('div');
-    item.classList.add('tasks__item');
-    item.classList.add('tasks__item_no-tasks');
+    item.classList.add('tasks__no-task');
     item.textContent = 'You have no tasks.';
     tasksList.appendChild(item);
   } else {
-    currentProject.getTasks().forEach((task) => {
+    currentProject.getTasks().forEach((task, index) => {
       item = document.createElement('div');
       item.classList.add('tasks__item');
 
-      // Set priority color
-      const taskPriority = task.getPriority();
+      // Sets priority color
+      const taskPriority = Number(task.getPriority());
       if (taskPriority === 1) {
         item.classList.add('tasks__item_priority-1');
       } else if (taskPriority === 2) {
@@ -51,12 +50,26 @@ const displayTaskList = () => {
         item.classList.add('tasks__item_priority-3');
       }
 
+      // Sets title
       const taskTitle = document.createElement('span');
       taskTitle.textContent = task.getTitle();
+
+      // Sets due date
       const taskDate = document.createElement('span');
-      taskDate.textContent = `Due: ${task.getDueDate()}`;
+      const dueDate = task.getDueDate();
+      if (dueDate) {
+        taskDate.textContent = `Due: ${dueDate}`;
+      }
+
+      // Task delete button
       const deleteBtn = document.createElement('div');
       deleteBtn.classList.add('item__close-btn');
+      deleteBtn.setAttribute('data-index', index);
+      deleteBtn.addEventListener('click', (e) => {
+        const i = e.currentTarget.getAttribute('data-index');
+        state.getCurrentProj().removeTask(i);
+        displayTaskList();
+      });
 
       item.appendChild(taskTitle);
       item.appendChild(taskDate);
