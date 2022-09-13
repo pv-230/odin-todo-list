@@ -40,7 +40,28 @@ const displayTaskList = () => {
     currentProject.getTasks().forEach((task) => {
       item = document.createElement('div');
       item.classList.add('tasks__item');
-      item.textContent = task.getTitle();
+
+      // Set priority color
+      const taskPriority = task.getPriority();
+      if (taskPriority === 1) {
+        item.classList.add('tasks__item_priority-1');
+      } else if (taskPriority === 2) {
+        item.classList.add('tasks__item_priority-2');
+      } else if (taskPriority === 3) {
+        item.classList.add('tasks__item_priority-3');
+      }
+
+      const taskTitle = document.createElement('span');
+      taskTitle.textContent = task.getTitle();
+      const taskDate = document.createElement('span');
+      taskDate.textContent = `Due: ${task.getDueDate()}`;
+      const deleteBtn = document.createElement('div');
+      deleteBtn.classList.add('item__close-btn');
+
+      item.appendChild(taskTitle);
+      item.appendChild(taskDate);
+      item.appendChild(deleteBtn);
+
       tasksList.appendChild(item);
     });
   }
@@ -102,7 +123,6 @@ const displayNewTask = () => {
 
   // Parent container for the task options
   const newTask = document.createElement('div');
-  newTask.classList.add('tasks__item');
   newTask.classList.add('new-task__inputs');
 
   // Title input

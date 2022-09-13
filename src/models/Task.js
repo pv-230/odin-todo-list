@@ -16,7 +16,7 @@ const Task = (t, d, dd, p) => {
   const getTitle = () => title;
   const getDescription = () => description;
   const getDueDate = () => dueDate;
-  const getPriorty = () => priority;
+  const getPriority = () => priority;
   const getInfo = () =>
     `Title: ${title}\n` +
     `Description: ${description}\n` +
@@ -33,7 +33,7 @@ const Task = (t, d, dd, p) => {
     getTitle,
     getDescription,
     getDueDate,
-    getPriorty,
+    getPriority,
     getInfo,
     setTitle,
     setDescription,

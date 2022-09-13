@@ -10,13 +10,14 @@
   --sidebar-hover: #dadada;
 
   /* Sizes */
-  --sidebar-width: 400px;
+  --sidebar-width: 300px;
 }
 
 .projects {
   display: flex;
   flex-direction: column;
   width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
   box-shadow: 2px 0px 8px #bbbbbb;
   font-family: 'RobotoRegular';
   background-color: var(--sidebar-bg);

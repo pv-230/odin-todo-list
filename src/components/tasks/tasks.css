@@ -7,8 +7,10 @@
   --project-info-bg: #b7b0ff;
   --tasks-bg: #d9d9d9;
   --task-item-bg: #eeeeee;
-  --add-task-btn: rgb(60, 255, 0);
-  --add-task-btn-hover: rgb(54, 233, 0);
+  --add-task-btn: #91ec36;
+  --add-task-btn-hover: #85da31;
+  --cancel-btn: rgb(223, 60, 60);
+  --cancel-btn-hover: rgb(206, 54, 54);
 
   --info-bar-height: 150px;
 }
@@ -89,15 +91,52 @@
 }
 
 .tasks__item {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 40px 10px 25px;
   background-color: var(--task-item-bg);
-  width: 100%;
+  width: min(100%, 800px);
+}
+
+.tasks__item:hover {
+  outline: 2px solid rgb(61, 61, 255);
+  cursor: pointer;
 }
 
 .tasks__item_no-tasks {
   text-align: center;
   width: fit-content;
+}
+
+.tasks__item_priority-1 {
+  box-shadow: inset 20px 0px rgb(255, 75, 75);
+}
+
+.tasks__item_priority-2 {
+  box-shadow: inset 20px 0px rgb(251, 255, 44);
+}
+
+.tasks__item_priority-3 {
+  box-shadow: inset 20px 0px rgb(86, 255, 44);
+}
+
+/* Item card styling */
+
+.item__close-btn {
+  position: absolute;
+  right: 5px;
+  width: 32px;
+  height: 32px;
+  background-image: url(../../assets/images/close.svg);
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.item__close-btn:hover {
+  background-color: #dbdbdb;
 }
 
 /* New task inputs */
@@ -108,6 +147,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 5px;
+  min-width: max-content;
 }
 
 .new-task__title {
@@ -119,7 +159,7 @@
 }
 
 .new-task__title_invalid {
-  border: 1px solid red;
+  outline: 2px solid red;
 }
 
 .new-task__description {
@@ -135,6 +175,7 @@
   border-radius: 5px;
   grid-column: 2 / 3;
   grid-row: 1 / 2;
+  height: 100%;
 }
 
 .new-task__priority {
@@ -142,30 +183,33 @@
   border-radius: 5px;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
+  height: 100%;
 }
 
 .new-task__accept-btn {
   border: none;
   border-radius: 5px;
-  background-color: rgb(0, 231, 0);
+  background-color: var(--add-task-btn);
   grid-column: 1 / 2;
   grid-row: 3 / 4;
+  height: 100%;
 }
 
 .new-task__accept-btn:hover {
-  background-color: rgb(0, 201, 0);
+  background-color: var(--add-task-btn-hover);
 }
 
 .new-task__cancel-btn {
   border: none;
   border-radius: 5px;
-  background-color: rgb(255, 107, 107);
+  background-color: var(--cancel-btn);
   grid-column: 2 / 3;
   grid-row: 3 / 4;
+  height: 100%;
 }
 
 .new-task__cancel-btn:hover {
-  background-color: rgb(255, 88, 88);
+  background-color: var(--cancel-btn-hover);
 }
 
 /* Used to hide elements */
