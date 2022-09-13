@@ -43,19 +43,21 @@ const displayTaskList = () => {
       // Sets priority color
       const taskPriority = Number(task.getPriority());
       if (taskPriority === 1) {
-        item.classList.add('tasks__item_priority-1');
+        item.classList.add('tasks__item_red');
       } else if (taskPriority === 2) {
-        item.classList.add('tasks__item_priority-2');
+        item.classList.add('tasks__item_yellow');
       } else if (taskPriority === 3) {
-        item.classList.add('tasks__item_priority-3');
+        item.classList.add('tasks__item_green');
       }
 
       // Sets title
       const taskTitle = document.createElement('span');
+      taskTitle.classList.add('item__title');
       taskTitle.textContent = task.getTitle();
 
       // Sets due date
       const taskDate = document.createElement('span');
+      taskDate.classList.add('item__date');
       const dueDate = task.getDueDate();
       if (dueDate) {
         taskDate.textContent = `Due: ${dueDate}`;
@@ -71,10 +73,24 @@ const displayTaskList = () => {
         displayTaskList();
       });
 
+      // Displays description when a task is clicked
+      item.addEventListener('click', (e) => {
+        let taskDescription = e.currentTarget.querySelector(
+          '.item__description'
+        );
+        if (taskDescription) {
+          taskDescription.remove();
+        } else {
+          taskDescription = document.createElement('span');
+          taskDescription.classList.add('item__description');
+          taskDescription.textContent = task.getDescription();
+          e.currentTarget.appendChild(taskDescription);
+        }
+      });
+
       item.appendChild(taskTitle);
       item.appendChild(taskDate);
       item.appendChild(deleteBtn);
-
       tasksList.appendChild(item);
     });
   }

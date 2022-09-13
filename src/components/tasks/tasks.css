@@ -91,7 +91,9 @@
 }
 
 .tasks__item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr fit-content;
+  gap: 20px;
   position: relative;
   justify-content: space-between;
   align-items: center;
@@ -102,8 +104,26 @@
 }
 
 .tasks__item:hover {
-  outline: 2px solid rgb(61, 61, 255);
+  outline: 2px solid rgb(147, 147, 255);
   cursor: pointer;
+}
+
+.item__title {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  font-size: 20px;
+}
+
+.item__date {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  font-size: 20px;
+}
+
+.item__description {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  color: rgb(54, 54, 54);
 }
 
 .tasks__no-task {
@@ -114,15 +134,15 @@
   width: fit-content;
 }
 
-.tasks__item_priority-1 {
+.tasks__item_red {
   box-shadow: inset 20px 0px rgb(255, 75, 75);
 }
 
-.tasks__item_priority-2 {
+.tasks__item_yellow {
   box-shadow: inset 20px 0px rgb(251, 255, 44);
 }
 
-.tasks__item_priority-3 {
+.tasks__item_green {
   box-shadow: inset 20px 0px rgb(86, 255, 44);
 }
 
@@ -130,6 +150,7 @@
 
 .item__close-btn {
   position: absolute;
+  top: 2px;
   right: 5px;
   width: 32px;
   height: 32px;
