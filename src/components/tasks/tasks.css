@@ -11,6 +11,7 @@
   --add-task-btn-hover: #85da31;
   --cancel-btn: rgb(223, 60, 60);
   --cancel-btn-hover: rgb(206, 54, 54);
+  --border-gray: #acacac;
 
   --info-bar-height: 150px;
 }
@@ -28,7 +29,6 @@
 .tasks__project-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 20px;
   padding: 20px;
   height: var(--info-bar-height);
@@ -58,7 +58,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
+  border: 1px solid var(--border-gray);
   border-radius: 5px;
   background-color: var(--add-task-btn);
   width: fit-content;
@@ -142,6 +142,7 @@
   padding: 5px;
   max-width: 80%;
   hyphens: auto;
+  word-break: break-word;
 }
 
 .item__close-btn {
@@ -190,7 +191,7 @@
 
 .new-task__title {
   padding: 5px;
-  border: 1px solid black;
+  border: 1px solid var(--border-gray);
   border-radius: 5px;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
@@ -202,14 +203,14 @@
 
 .new-task__description {
   padding: 5px;
-  border: 1px solid black;
+  border: 1px solid var(--border-gray);
   border-radius: 5px;
   grid-column: 1 / 2;
   grid-row: 2 / 3;
 }
 
 .new-task__date {
-  border: 1px solid black;
+  border: 1px solid var(--border-gray);
   border-radius: 5px;
   grid-column: 2 / 3;
   grid-row: 1 / 2;
@@ -217,7 +218,7 @@
 }
 
 .new-task__priority {
-  border: 1px solid black;
+  border: 1px solid var(--border-gray);
   border-radius: 5px;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
@@ -225,7 +226,7 @@
 }
 
 .new-task__accept-btn {
-  border: none;
+  border: 1px solid var(--border-gray);
   border-radius: 5px;
   background-color: var(--add-task-btn);
   grid-column: 1 / 2;
@@ -238,7 +239,7 @@
 }
 
 .new-task__cancel-btn {
-  border: none;
+  border: 1px solid var(--border-gray);
   border-radius: 5px;
   background-color: var(--cancel-btn);
   grid-column: 2 / 3;

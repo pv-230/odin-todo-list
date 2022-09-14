@@ -21,8 +21,15 @@
   box-shadow: 2px 0px 8px #bbbbbb;
   font-family: 'RobotoRegular';
   background-color: var(--sidebar-bg);
-  gap: 10px;
   z-index: 1;
+}
+
+.projects_closed {
+  width: fit-content;
+  min-width: fit-content;
+  position: absolute;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 /* Sidebar menu top */
@@ -33,6 +40,10 @@
   align-items: center;
   padding: 20px;
   border-bottom: 1px solid var(--sidebar-selected);
+}
+
+.projects__title-group_closed {
+  border-bottom: none;
 }
 
 .projects__menu-title {
@@ -53,6 +64,17 @@
 .projects__menu-btn:hover {
   background-color: var(--sidebar-hover);
   cursor: pointer;
+}
+
+.projects__menu-btn_open:hover {
+  background-image: url(../../assets/images/backburger.svg);
+  background-size: cover;
+}
+
+.projects__menu-btn_closed:hover {
+  background-image: url(../../assets/images/forwardburger.svg);
+  background-size: cover;
+  background-color: transparent;
 }
 
 .projects__menu-icon {
@@ -122,4 +144,8 @@
 .projects__add-btn:hover {
   background-color: var(--sidebar-hover);
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }
