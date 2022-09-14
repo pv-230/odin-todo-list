@@ -86,44 +86,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
 }
 
 .tasks__item {
   display: grid;
-  grid-template-columns: 1fr fit-content;
-  gap: 20px;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
+  grid-template-columns: 20px 1fr auto auto;
   border-radius: 5px;
-  padding: 10px 40px 10px 25px;
   background-color: var(--task-item-bg);
   width: min(100%, 800px);
+  box-shadow: 5px 5px 5px #c2c2c2;
 }
 
 .tasks__item:hover {
   outline: 2px solid rgb(147, 147, 255);
   cursor: pointer;
-}
-
-.item__title {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  font-size: 20px;
-}
-
-.item__date {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  font-size: 20px;
-}
-
-.item__description {
-  grid-column: 1 / 3;
-  grid-row: 2 / 3;
-  color: rgb(54, 54, 54);
 }
 
 .tasks__no-task {
@@ -134,24 +112,41 @@
   width: fit-content;
 }
 
-.tasks__item_red {
-  box-shadow: inset 20px 0px rgb(255, 75, 75);
-}
-
-.tasks__item_yellow {
-  box-shadow: inset 20px 0px rgb(251, 255, 44);
-}
-
-.tasks__item_green {
-  box-shadow: inset 20px 0px rgb(86, 255, 44);
-}
-
 /* Item card styling */
 
+.item__title {
+  display: flex;
+  align-items: center;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  font-size: 20px;
+  padding: 5px;
+  max-width: 40ch;
+}
+
+.item__date {
+  display: flex;
+  align-items: center;
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.item__description {
+  display: flex;
+  align-items: center;
+  grid-column: 2 / 4;
+  grid-row: 2 / 3;
+  color: rgb(54, 54, 54);
+  padding: 5px;
+  max-width: 80%;
+  hyphens: auto;
+}
+
 .item__close-btn {
-  position: absolute;
-  top: 2px;
-  right: 5px;
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
   width: 32px;
   height: 32px;
   background-image: url(../../assets/images/close.svg);
@@ -161,6 +156,25 @@
 
 .item__close-btn:hover {
   background-color: #dbdbdb;
+}
+
+.item__tab {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.item__tab_red {
+  background-color: rgb(255, 75, 75);
+}
+
+.item__tab_yellow {
+  background-color: rgb(251, 255, 44);
+}
+
+.item__tab_green {
+  background-color: rgb(86, 255, 44);
 }
 
 /* New task inputs */

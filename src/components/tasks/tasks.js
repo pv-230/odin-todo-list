@@ -41,13 +41,15 @@ const displayTaskList = () => {
       item.classList.add('tasks__item');
 
       // Sets priority color
+      const taskPriorityTab = document.createElement('div');
+      taskPriorityTab.classList.add('item__tab');
       const taskPriority = Number(task.getPriority());
       if (taskPriority === 1) {
-        item.classList.add('tasks__item_red');
+        taskPriorityTab.classList.add('item__tab_red');
       } else if (taskPriority === 2) {
-        item.classList.add('tasks__item_yellow');
+        taskPriorityTab.classList.add('item__tab_yellow');
       } else if (taskPriority === 3) {
-        item.classList.add('tasks__item_green');
+        taskPriorityTab.classList.add('item__tab_green');
       }
 
       // Sets title
@@ -88,6 +90,7 @@ const displayTaskList = () => {
         }
       });
 
+      item.appendChild(taskPriorityTab);
       item.appendChild(taskTitle);
       item.appendChild(taskDate);
       item.appendChild(deleteBtn);
@@ -159,12 +162,14 @@ const displayNewTask = () => {
   newTaskTitle.classList.add('new-task__title');
   newTaskTitle.setAttribute('type', 'text');
   newTaskTitle.setAttribute('placeholder', 'Enter title');
+  newTaskTitle.setAttribute('maxlength', '30');
 
   // Description input
   const newTaskDescription = document.createElement('input');
   newTaskDescription.classList.add('new-task__description');
   newTaskDescription.setAttribute('type', 'text');
   newTaskDescription.setAttribute('placeholder', 'Enter description');
+  newTaskDescription.setAttribute('maxlength', '100');
 
   // Due date input
   const newTaskDate = document.createElement('input');
