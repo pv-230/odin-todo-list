@@ -104,6 +104,9 @@
 
 .projects__item-title {
   font-size: 32px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .projects__delete-btn {
