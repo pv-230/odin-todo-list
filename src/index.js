@@ -18,5 +18,21 @@ state
   .addTask(Task('Test Title', 'Test Description', '2022-09-22', 1));
 
 // Setup the display
-projects.displayProjList(state);
+projects.initProjects(state);
 tasks.initTasks(state);
+
+// Event listener for adding new projects
+const addProjectBtn = document.querySelector('.projects__add-btn');
+addProjectBtn.addEventListener('click', () => {
+  const newProjectTitle = document.querySelector(
+    '.projects__new-item-input'
+  ).value;
+
+  console.log(newProjectTitle);
+
+  if (newProjectTitle) {
+    state.projArr.push(Project(newProjectTitle, 'No description.'));
+    projects.initProjects(state);
+    tasks.initTasks(state);
+  }
+});

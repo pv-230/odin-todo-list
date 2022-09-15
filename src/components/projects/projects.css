@@ -7,7 +7,9 @@
   /* Colors */
   --sidebar-bg: #eeeeee;
   --sidebar-selected: #b1b1b1;
-  --sidebar-hover: #dadada;
+  --sidebar-menu-hover: #dddddd;
+  --sidebar-add-hover: #90ff6e;
+  --sidebar-delete-hover: #ff6464;
 
   /* Sizes */
   --sidebar-width: 300px;
@@ -62,7 +64,7 @@
 }
 
 .projects__menu-btn:hover {
-  background-color: var(--sidebar-hover);
+  background-color: var(--sidebar-menu-hover);
   cursor: pointer;
 }
 
@@ -92,6 +94,10 @@
   font-family: RobotoRegular;
 }
 
+.projects__item:hover:not(.projects__item_selected) {
+  background-color: #d8d8d8;
+}
+
 .projects__item_selected {
   background-color: var(--sidebar-selected);
 }
@@ -109,7 +115,7 @@
 }
 
 .projects__delete-btn:hover {
-  background-color: var(--sidebar-hover);
+  background-color: var(--sidebar-delete-hover);
   cursor: pointer;
 }
 
@@ -142,7 +148,7 @@
 }
 
 .projects__add-btn:hover {
-  background-color: var(--sidebar-hover);
+  background-color: var(--sidebar-add-hover);
   cursor: pointer;
 }
 
