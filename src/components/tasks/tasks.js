@@ -103,7 +103,7 @@ const displayTaskList = () => {
  * Initializes the task view.
  * @param {Object} s App state.
  */
-const initTasks = (s) => {
+const updateTasks = (s) => {
   state = s;
   displayProjectInfo();
   displayTaskList();
@@ -218,4 +218,4 @@ const displayNewTask = () => {
 const addTaskBtn = document.querySelector('.tasks__add-task-btn');
 addTaskBtn.addEventListener('click', displayNewTask);
 
-export { initTasks };
+export { updateTasks };

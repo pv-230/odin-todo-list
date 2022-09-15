@@ -109,9 +109,12 @@
 .projects__delete-btn {
   width: 48px;
   height: 48px;
+  border-radius: 5px;
+}
+
+.projects__item:hover .projects__delete-btn {
   background-image: url(../../assets/images/delete-outline.svg);
   background-size: cover;
-  border-radius: 5px;
 }
 
 .projects__delete-btn:hover {
