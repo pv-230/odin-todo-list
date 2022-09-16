@@ -13,7 +13,6 @@ const Project = (t, d) => {
   const getTitle = () => title;
   const getDescription = () => description;
   const getTasks = () => [...tasks];
-  const getInfo = () => `Title: ${title}\nDescription: ${description}\n`;
 
   // Setters
   const setTitle = (newTitle) => (title = newTitle);
@@ -31,7 +30,6 @@ const Project = (t, d) => {
     getTitle,
     getDescription,
     getTasks,
-    getInfo,
     setTitle,
     setDescription,
     addTask,

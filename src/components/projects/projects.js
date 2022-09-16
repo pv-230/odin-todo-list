@@ -4,12 +4,11 @@ import Project from '../../models/Project';
 import Task from '../../models/Task';
 
 const state = {
-  projArr: [Project()], // Stores all projects
+  projArr: [Project()], // Stores all projects starting with the default
   currentProj: 0, // Currently selected project by index
-  getCurrentProj: () => state.projArr[state.currentProj],
 };
 
-// Common nodes
+// Common elements
 const menuBtn = document.querySelector('.projects__menu-btn');
 const projects = document.querySelector('.projects');
 const menuGroup = document.querySelector('.projects__title-group');
@@ -20,12 +19,9 @@ const projectInfo = document.querySelector('.tasks__project-info');
 const addProjectBtn = document.querySelector('.projects__add-btn');
 
 // Temp for testing
-state
-  .getCurrentProj()
-  .addTask(Task('Test Title', 'Test Description', '2022-09-22', 1));
-
-// Show tasks
-tasks.updateTasks(state);
+state.projArr[state.currentProj].addTask(
+  Task('Test Title', 'Test Description', '2022-09-22', 1)
+);
 
 /**
  * Displays all existing projects in the sidebar.
@@ -36,57 +32,70 @@ const displayProjList = () => {
   }
 
   // Adds all existing projects to the sidebar
-  state.projArr.forEach((proj, i) => {
+  state.projArr.forEach((p, i) => {
     const listItem = document.createElement('li');
     listItem.classList.add('projects__item');
     listItem.setAttribute('data-index', i);
 
-    // Highlight selected project
-    if (i === state.currentProj) {
-      listItem.classList.add('projects__item_selected');
-    }
-
     // Event listener for selections
     listItem.addEventListener('click', (e) => {
-      const index = Number(e.currentTarget.getAttribute('data-index'));
-      state.currentProj = index;
+      const dataIndex = Number(e.currentTarget.getAttribute('data-index'));
+      state.currentProj = dataIndex;
       displayProjList();
       tasks.updateTasks(state);
     });
 
+    // Highlight selected project
+    if (state.currentProj === i) {
+      listItem.classList.add('projects__item_selected');
+    }
+
+    // Sets project title
     const listItemTitle = document.createElement('span');
     listItemTitle.classList.add('projects__item-title');
-    listItemTitle.textContent = proj.getTitle();
-
-    const deleteBtn = document.createElement('div');
-    deleteBtn.classList.add('projects__delete-btn');
-
+    listItemTitle.textContent = p.getTitle();
     listItem.appendChild(listItemTitle);
-    listItem.appendChild(deleteBtn);
+
+    // Shows project delete button if more than one project
+    if (state.projArr.length > 1) {
+      const deleteBtn = document.createElement('div');
+      deleteBtn.classList.add('projects__delete-btn');
+      deleteBtn.setAttribute('data-index', i);
+      deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dataIndex = Number(e.currentTarget.getAttribute('data-index'));
+        state.projArr.splice(dataIndex, 1);
+        state.currentProj = 0;
+        displayProjList();
+        tasks.updateTasks(state);
+      });
+      listItem.appendChild(deleteBtn);
+    }
+
     projectsList.appendChild(listItem);
   });
 };
 
 /**
- * Event listener for adding new projects
+ * Event listener for adding new projects.
  */
 addProjectBtn.addEventListener('click', () => {
   const newProjectTitle = document.querySelector(
     '.projects__new-item-input'
   ).value;
 
-  document.querySelector('.projects__new-item-input').value = '';
-
   if (newProjectTitle) {
-    state.projArr.push(Project(newProjectTitle, 'No description.'));
+    document.querySelector('.projects__new-item-input').value = '';
+    const newProject = Project(newProjectTitle, 'No description.');
+    state.projArr.push(newProject);
     state.currentProj = state.projArr.length - 1;
-    tasks.updateTasks(state);
     displayProjList();
+    tasks.updateTasks(state);
   }
 });
 
 /**
- * Event listener for the menu button (show/hide projects)
+ * Event listener for the menu button (show/hide projects).
  */
 menuBtn.addEventListener('click', () => {
   if (menuBtn.classList.contains('projects__menu-btn_open')) {
@@ -114,4 +123,6 @@ menuBtn.addEventListener('click', () => {
   }
 });
 
+// Initialize views
 displayProjList();
+tasks.updateTasks(state);

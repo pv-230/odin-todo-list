@@ -71,7 +71,7 @@ const displayTaskList = () => {
       deleteBtn.setAttribute('data-index', index);
       deleteBtn.addEventListener('click', (e) => {
         const i = e.currentTarget.getAttribute('data-index');
-        state.getCurrentProj().removeTask(i);
+        state.projArr[state.currentProj].removeTask(i);
         displayTaskList();
       });
 

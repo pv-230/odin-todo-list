@@ -92,6 +92,7 @@
   align-items: center;
   padding: 5px 20px;
   font-family: RobotoRegular;
+  height: 58px;
 }
 
 .projects__item:hover:not(.projects__item_selected) {
