@@ -12,6 +12,7 @@
   --cancel-btn: rgb(223, 60, 60);
   --cancel-btn-hover: rgb(206, 54, 54);
   --border-gray: #acacac;
+  --input-focus-border: rgb(61, 61, 253);
 
   --info-bar-height: 150px;
 }
@@ -38,6 +39,97 @@
 
 .tasks__project-title {
   font-size: 48px;
+}
+
+.tasks__title-group,
+.tasks__descrip-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 24px;
+}
+
+.tasks__edit-title-btn,
+.tasks__edit-descrip-btn {
+  display: none;
+}
+
+.tasks__title-group:hover .tasks__edit-title-btn:not(.hidden),
+.tasks__descrip-group:hover .tasks__edit-descrip-btn:not(.hidden) {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  background-image: url(../../assets/images/pencil-outline.svg);
+  background-size: cover;
+}
+
+.tasks__title-group:hover .tasks__edit-title-btn:hover,
+.tasks__descrip-group:hover .tasks__edit-descrip-btn:hover {
+  background-color: rgba(238, 238, 238, 50%);
+}
+
+.tasks__save-title-btn {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  background-image: url(../../assets/images/content-save-edit-outline.svg);
+  background-size: cover;
+}
+
+.tasks__save-title-btn:hover {
+  background-color: rgba(238, 238, 238, 50%);
+}
+
+.tasks__new-title-input {
+  border: none;
+  background-color: #dddddd;
+  width: 35ch;
+  height: 48px;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 0 5px;
+}
+
+.tasks__new-title-input:focus {
+  outline: 2px solid var(--input-focus-border);
+}
+
+.tasks__project-title,
+.tasks__project-descrip {
+  max-width: 80%;
+}
+
+.tasks__save-descrip-btn {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  background-image: url(../../assets/images/content-save-edit-outline.svg);
+  background-size: cover;
+}
+
+.tasks__save-descrip-btn:hover {
+  background-color: rgba(238, 238, 238, 50%);
+}
+
+.tasks__new-descrip-input {
+  border: none;
+  background-color: #dddddd;
+  width: 35ch;
+  height: 48px;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 0 5px;
+}
+
+.tasks__new-descrip-input:focus {
+  outline: 2px solid var(--input-focus-border);
 }
 
 /* Parent container for task operations */

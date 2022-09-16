@@ -10,10 +10,14 @@ const displayProjectInfo = () => {
   const currentProject = state.projArr[state.currentProj];
 
   const projectTitle = document.querySelector('.tasks__project-title');
-  projectTitle.textContent = currentProject.getTitle();
+  if (projectTitle) {
+    projectTitle.textContent = currentProject.getTitle();
+  }
 
   const projectDescrip = document.querySelector('.tasks__project-descrip');
-  projectDescrip.textContent = currentProject.getDescription();
+  if (projectDescrip) {
+    projectDescrip.textContent = currentProject.getDescription();
+  }
 };
 
 /**
@@ -143,7 +147,7 @@ const addNewTask = () => {
 };
 
 /**
- * Shows a card where the user can enter information about a new task.
+ * Shows a form where the user can enter information about a new task.
  */
 const displayNewTask = () => {
   const addTaskBtn = document.querySelector('.tasks__add-task-btn');

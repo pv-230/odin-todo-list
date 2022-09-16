@@ -8,7 +8,7 @@ const state = {
   currentProj: 0, // Currently selected project by index
 };
 
-// Common elements
+// HTML elements
 const menuBtn = document.querySelector('.projects__menu-btn');
 const projects = document.querySelector('.projects');
 const menuGroup = document.querySelector('.projects__title-group');
@@ -17,11 +17,30 @@ const projectsInput = document.querySelector('.projects__new-item');
 const projectsList = document.querySelector('.projects__list');
 const projectInfo = document.querySelector('.tasks__project-info');
 const addProjectBtn = document.querySelector('.projects__add-btn');
+const projectTitle = document.querySelector('.tasks__project-title');
+const editTitleBtn = document.querySelector('.tasks__edit-title-btn');
+const projectDescrip = document.querySelector('.tasks__project-descrip');
+const editDescripBtn = document.querySelector('.tasks__edit-descrip-btn');
 
 // Temp for testing
 state.projArr[state.currentProj].addTask(
   Task('Test Title', 'Test Description', '2022-09-22', 1)
 );
+
+/**
+ * Checks to see if the user is editing project info.
+ * @returns True if currently editing project info.
+ */
+const isEditing = () => {
+  const saveTitleBtn = document.querySelector('.tasks__save-title-btn');
+  const saveDescripBtn = document.querySelector('.tasks__save-descrip-btn');
+
+  if (saveTitleBtn || saveDescripBtn) {
+    return true;
+  }
+
+  return false;
+};
 
 /**
  * Displays all existing projects in the sidebar.
@@ -39,10 +58,12 @@ const displayProjList = () => {
 
     // Event listener for selections
     listItem.addEventListener('click', (e) => {
-      const dataIndex = Number(e.currentTarget.getAttribute('data-index'));
-      state.currentProj = dataIndex;
-      displayProjList();
-      tasks.updateTasks(state);
+      if (!isEditing()) {
+        const dataIndex = Number(e.currentTarget.getAttribute('data-index'));
+        state.currentProj = dataIndex;
+        displayProjList();
+        tasks.updateTasks(state);
+      }
     });
 
     // Highlight selected project
@@ -84,7 +105,7 @@ addProjectBtn.addEventListener('click', () => {
     '.projects__new-item-input'
   ).value;
 
-  if (newProjectTitle) {
+  if (newProjectTitle && !isEditing()) {
     document.querySelector('.projects__new-item-input').value = '';
     const newProject = Project(newProjectTitle, 'No description.');
     state.projArr.push(newProject);
@@ -120,6 +141,66 @@ menuBtn.addEventListener('click', () => {
     menuTitle.classList.remove('hidden');
     projectsInput.classList.remove('hidden');
     projectsList.classList.remove('hidden');
+  }
+});
+
+/**
+ * Event listener to edit project title.
+ */
+editTitleBtn.addEventListener('click', () => {
+  if (!document.querySelector('.tasks__new-title-input')) {
+    editDescripBtn.classList.add('hidden');
+
+    const saveTitleBtn = document.createElement('button');
+    saveTitleBtn.classList.add('tasks__save-title-btn');
+
+    const newTitleInput = document.createElement('input');
+    newTitleInput.classList.add('tasks__new-title-input');
+    newTitleInput.setAttribute('type', 'text');
+    newTitleInput.setAttribute('maxlength', '30');
+    newTitleInput.value = state.projArr[state.currentProj].getTitle();
+
+    saveTitleBtn.addEventListener('click', () => {
+      state.projArr[state.currentProj].setTitle(newTitleInput.value);
+      saveTitleBtn.replaceWith(editTitleBtn);
+      newTitleInput.replaceWith(projectTitle);
+      editDescripBtn.classList.remove('hidden');
+      displayProjList();
+      tasks.updateTasks(state);
+    });
+
+    editTitleBtn.replaceWith(saveTitleBtn);
+    projectTitle.replaceWith(newTitleInput);
+  }
+});
+
+/**
+ * Event listener to edit project description.
+ */
+editDescripBtn.addEventListener('click', () => {
+  if (!document.querySelector('.tasks__new-descrip-input')) {
+    editTitleBtn.classList.add('hidden');
+
+    const saveDescripBtn = document.createElement('button');
+    saveDescripBtn.classList.add('tasks__save-descrip-btn');
+
+    const newDescripInput = document.createElement('input');
+    newDescripInput.classList.add('tasks__new-descrip-input');
+    newDescripInput.setAttribute('type', 'text');
+    newDescripInput.setAttribute('maxlength', '250');
+    newDescripInput.value = state.projArr[state.currentProj].getDescription();
+
+    saveDescripBtn.addEventListener('click', () => {
+      state.projArr[state.currentProj].setDescription(newDescripInput.value);
+      saveDescripBtn.replaceWith(editDescripBtn);
+      newDescripInput.replaceWith(projectDescrip);
+      editTitleBtn.classList.remove('hidden');
+      displayProjList();
+      tasks.updateTasks(state);
+    });
+
+    editDescripBtn.replaceWith(saveDescripBtn);
+    projectDescrip.replaceWith(newDescripInput);
   }
 });
 
