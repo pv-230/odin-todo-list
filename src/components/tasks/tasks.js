@@ -74,23 +74,30 @@ const displayTaskList = () => {
       deleteBtn.classList.add('item__close-btn');
       deleteBtn.setAttribute('data-index', index);
       deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const i = e.currentTarget.getAttribute('data-index');
         state.projArr[state.currentProj].removeTask(i);
         displayTaskList();
       });
 
-      // Displays description when a task is clicked
+      // Expands task when clicked
       item.addEventListener('click', (e) => {
-        let taskDescription = e.currentTarget.querySelector(
-          '.item__description'
-        );
-        if (taskDescription) {
-          taskDescription.remove();
+        if (e.currentTarget.classList.contains('tasks__item_expanded')) {
+          e.currentTarget.classList.remove('tasks__item_expanded');
+          e.currentTarget.querySelector('.item__description').remove();
+          e.currentTarget.querySelector('.item__edit-btn').remove();
         } else {
-          taskDescription = document.createElement('span');
+          e.currentTarget.classList.add('tasks__item_expanded');
+
+          const taskDescription = document.createElement('span');
           taskDescription.classList.add('item__description');
           taskDescription.textContent = task.getDescription();
           e.currentTarget.appendChild(taskDescription);
+
+          const editBtn = document.createElement('button');
+          editBtn.setAttribute('type', 'text');
+          editBtn.classList.add('item__edit-btn');
+          e.currentTarget.appendChild(editBtn);
         }
       });
 

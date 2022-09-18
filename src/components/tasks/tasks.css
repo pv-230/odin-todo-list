@@ -270,6 +270,22 @@
   background-color: rgb(86, 255, 44);
 }
 
+.item__edit-btn {
+  grid-column: 4 / 5;
+  grid-row: 2 / 3;
+  width: 32px;
+  height: 32px;
+  background-image: url(../../assets/images/pencil-outline.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+}
+
+.item__edit-btn:hover {
+  background-color: var(--tasks-bg);
+}
+
 /* New task inputs */
 
 .new-task__inputs {
