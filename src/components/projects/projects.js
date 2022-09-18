@@ -1,7 +1,6 @@
 import './projects.css';
 import * as tasks from '../tasks/tasks';
 import Project from '../../models/Project';
-import Task from '../../models/Task';
 
 const state = {
   projArr: [Project()], // Stores all projects starting with the default
@@ -21,11 +20,6 @@ const projectTitle = document.querySelector('.tasks__project-title');
 const editTitleBtn = document.querySelector('.tasks__edit-title-btn');
 const projectDescrip = document.querySelector('.tasks__project-descrip');
 const editDescripBtn = document.querySelector('.tasks__edit-descrip-btn');
-
-// Temp for testing
-state.projArr[state.currentProj].addTask(
-  Task('Test Title', 'Test Description', '2022-09-22', 1)
-);
 
 /**
  * Checks to see if the user is editing project info.
