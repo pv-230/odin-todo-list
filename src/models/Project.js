@@ -26,6 +26,11 @@ const Project = (t, d) => {
     tasks.splice(index, 1);
   };
 
+  // Replaces a task with another.
+  const replaceTask = (index, task) => {
+    tasks.splice(index, 1, task);
+  };
+
   return {
     getTitle,
     getDescription,
@@ -34,6 +39,7 @@ const Project = (t, d) => {
     setDescription,
     addTask,
     removeTask,
+    replaceTask,
   };
 };
 

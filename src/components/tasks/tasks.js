@@ -89,14 +89,19 @@ const displayTaskList = () => {
         } else {
           e.currentTarget.classList.add('tasks__item_expanded');
 
+          // Displays task description
           const taskDescription = document.createElement('span');
           taskDescription.classList.add('item__description');
           taskDescription.textContent = task.getDescription();
           e.currentTarget.appendChild(taskDescription);
 
+          // Displays an edit button for the task
           const editBtn = document.createElement('button');
           editBtn.setAttribute('type', 'text');
+          editBtn.setAttribute('data-index', index);
           editBtn.classList.add('item__edit-btn');
+          // eslint-disable-next-line no-use-before-define
+          editBtn.addEventListener('click', showEditTask);
           e.currentTarget.appendChild(editBtn);
         }
       });
@@ -108,6 +113,104 @@ const displayTaskList = () => {
       tasksList.appendChild(item);
     });
   }
+};
+
+const updateTaskInfo = (e) => {
+  e.stopPropagation();
+  const taskIndex = e.currentTarget.getAttribute('data-index');
+
+  const title = document.querySelector('.edit-task__title').value;
+  const descrip = document.querySelector('.edit-task__description').value;
+  const date = document.querySelector('.edit-task__date').value;
+  const priority = document.querySelector('.edit-task__priority').value;
+
+  if (!title) {
+    const titleInput = document.querySelector('.edit-task__title');
+    titleInput.classList.add('edit-task__title_invalid');
+    return;
+  }
+
+  state.projArr[state.currentProj].replaceTask(
+    taskIndex,
+    Task(title, descrip, date, priority)
+  );
+  displayTaskList();
+};
+
+/**
+ * Displays a form to edit task info.
+ */
+const showEditTask = (e) => {
+  e.stopPropagation();
+  const taskIndex = e.currentTarget.getAttribute('data-index');
+  const currentTask = state.projArr[state.currentProj].getTasks()[taskIndex];
+
+  // Parent container for the task edit options
+  const editTaskInputs = document.createElement('div');
+  editTaskInputs.classList.add('edit-task__inputs');
+
+  // Title input
+  const editTaskTitle = document.createElement('input');
+  editTaskTitle.classList.add('edit-task__title');
+  editTaskTitle.setAttribute('type', 'text');
+  editTaskTitle.value = currentTask.getTitle();
+  editTaskTitle.setAttribute('maxlength', '30');
+  editTaskInputs.appendChild(editTaskTitle);
+
+  // Description input
+  const editTaskDescription = document.createElement('input');
+  editTaskDescription.classList.add('edit-task__description');
+  editTaskDescription.setAttribute('type', 'text');
+  editTaskDescription.value = currentTask.getDescription();
+  editTaskDescription.setAttribute('maxlength', '100');
+  editTaskInputs.appendChild(editTaskDescription);
+
+  // Due date input
+  const editTaskDate = document.createElement('input');
+  editTaskDate.classList.add('edit-task__date');
+  editTaskDate.setAttribute('type', 'date');
+  editTaskDate.value = currentTask.getDueDate();
+  editTaskInputs.appendChild(editTaskDate);
+
+  // Priority input
+  const editTaskPriority = document.createElement('select');
+  editTaskPriority.classList.add('edit-task__priority');
+  let option = document.createElement('option');
+  option.textContent = 'Select a priority level';
+  option.value = 0;
+  editTaskPriority.appendChild(option);
+  for (let i = 1; i <= 3; i += 1) {
+    option = document.createElement('option');
+    if (Number(currentTask.getPriority()) === i) {
+      option.setAttribute('selected', true);
+    }
+    option.textContent = `${i}`;
+    option.value = i;
+    editTaskPriority.appendChild(option);
+  }
+  editTaskInputs.appendChild(editTaskPriority);
+
+  // Confirmation button
+  const acceptBtn = document.createElement('button');
+  acceptBtn.classList.add('edit-task__accept-btn');
+  acceptBtn.setAttribute('type', 'button');
+  acceptBtn.setAttribute('data-index', taskIndex);
+  acceptBtn.textContent = 'Accept';
+  acceptBtn.addEventListener('click', updateTaskInfo);
+  editTaskInputs.appendChild(acceptBtn);
+
+  // Cancel button
+  const cancelBtn = document.createElement('button');
+  cancelBtn.classList.add('edit-task__cancel-btn');
+  cancelBtn.setAttribute('type', 'button');
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.addEventListener('click', () => {
+    editTaskInputs.remove();
+    displayTaskList();
+  });
+  editTaskInputs.appendChild(cancelBtn);
+
+  e.currentTarget.parentElement.replaceWith(editTaskInputs);
 };
 
 /**
