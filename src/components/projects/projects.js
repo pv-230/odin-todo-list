@@ -1,9 +1,11 @@
 import './projects.css';
 import * as tasks from '../tasks/tasks';
+import * as storage from '../../utility/storage';
 import Project from '../../models/Project';
+import Task from '../../models/Task';
 
 const state = {
-  projArr: [Project()], // Stores all projects starting with the default
+  projArr: [], // Stores all projects
   currentProj: 0, // Currently selected project by index
 };
 
@@ -55,6 +57,7 @@ const displayProjList = () => {
       if (!isEditing()) {
         const dataIndex = Number(e.currentTarget.getAttribute('data-index'));
         state.currentProj = dataIndex;
+        storage.storeState(state);
         displayProjList();
         tasks.updateTasks(state);
       }
@@ -81,6 +84,7 @@ const displayProjList = () => {
         const dataIndex = Number(e.currentTarget.getAttribute('data-index'));
         state.projArr.splice(dataIndex, 1);
         state.currentProj = 0;
+        storage.storeState(state);
         displayProjList();
         tasks.updateTasks(state);
       });
@@ -104,6 +108,7 @@ addProjectBtn.addEventListener('click', () => {
     const newProject = Project(newProjectTitle, 'No description.');
     state.projArr.push(newProject);
     state.currentProj = state.projArr.length - 1;
+    storage.storeState(state);
     displayProjList();
     tasks.updateTasks(state);
   }
@@ -159,6 +164,7 @@ editTitleBtn.addEventListener('click', () => {
       saveTitleBtn.replaceWith(editTitleBtn);
       newTitleInput.replaceWith(projectTitle);
       editDescripBtn.classList.remove('hidden');
+      storage.storeState(state);
       displayProjList();
       tasks.updateTasks(state);
     });
@@ -189,6 +195,7 @@ editDescripBtn.addEventListener('click', () => {
       saveDescripBtn.replaceWith(editDescripBtn);
       newDescripInput.replaceWith(projectDescrip);
       editTitleBtn.classList.remove('hidden');
+      storage.storeState(state);
       displayProjList();
       tasks.updateTasks(state);
     });
@@ -198,6 +205,33 @@ editDescripBtn.addEventListener('click', () => {
   }
 });
 
-// Initialize views
+/**
+ * Loads project data from local storage.
+ */
+const loadData = () => {
+  if (storage.storageAvailable('localStorage') && localStorage.length > 0) {
+    const storedState = JSON.parse(localStorage.getItem('state'));
+    state.currentProj = storedState.currentProj;
+    storedState.projArrJSON.forEach((p) => {
+      const proj = Project(p.title, p.description);
+      p.taskArrJSON.forEach((t) => {
+        const task = JSON.parse(t);
+        proj.addTask(
+          Task(task.title, task.description, task.dueDate, task.priority)
+        );
+      });
+      state.projArr.push(proj);
+    });
+  } else {
+    state.projArr.push(Project());
+    // Test
+    state.projArr[state.currentProj].addTask(
+      Task('Test Task', 'Test Description', '2022-10-20', 3)
+    );
+  }
+};
+
+// Initialize
+loadData();
 displayProjList();
 tasks.updateTasks(state);

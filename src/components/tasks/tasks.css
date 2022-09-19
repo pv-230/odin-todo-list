@@ -202,6 +202,7 @@
   padding: 10px;
   background-color: var(--task-item-bg);
   width: fit-content;
+  box-shadow: 5px 5px 5px #c2c2c2;
 }
 
 /* Item card styling */

@@ -1,5 +1,6 @@
 import './tasks.css';
 import Task from '../../models/Task';
+import * as storage from '../../utility/storage';
 
 let state = null;
 
@@ -77,6 +78,7 @@ const displayTaskList = () => {
         e.stopPropagation();
         const i = e.currentTarget.getAttribute('data-index');
         state.projArr[state.currentProj].removeTask(i);
+        storage.storeState(state);
         displayTaskList();
       });
 
@@ -134,6 +136,7 @@ const updateTaskInfo = (e) => {
     taskIndex,
     Task(title, descrip, date, priority)
   );
+  storage.storeState(state);
   displayTaskList();
 };
 
@@ -252,6 +255,7 @@ const addNewTask = () => {
   state.projArr[state.currentProj].addTask(
     Task(title, descrip, date, priority)
   );
+  storage.storeState(state);
   closeNewTask();
   displayTaskList();
 };
