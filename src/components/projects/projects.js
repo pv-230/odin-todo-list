@@ -69,7 +69,7 @@ const displayProjList = () => {
     }
 
     // Sets project title
-    const listItemTitle = document.createElement('span');
+    const listItemTitle = document.createElement('div');
     listItemTitle.classList.add('projects__item-title');
     listItemTitle.textContent = p.getTitle();
     listItem.appendChild(listItemTitle);

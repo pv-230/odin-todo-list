@@ -104,12 +104,11 @@
 }
 
 .projects__item-title {
-  display: flex;
-  align-items: center;
+  display: block;
   font-size: 32px;
   max-width: 200px;
-  max-height: 100%;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
