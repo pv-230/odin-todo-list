@@ -35,7 +35,7 @@ const storageAvailable = (type) => {
  * Stores the current app state into localStorage.
  */
 const storeState = (state) => {
-  if (storageAvailable) {
+  if (storageAvailable('localStorage')) {
     const stateJSON = {
       projArrJSON: [],
       currentProj: state.currentProj,
