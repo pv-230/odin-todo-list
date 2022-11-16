@@ -1,3 +1,6 @@
-# odin-todo-list
+## Project description
+This is my attempt at the Todo List project from The Odin Project.
 
-https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/todo-list
+Website link: https://pv-230.github.io/odin-todo-list/
+
+More info here: https://www.theodinproject.com/lessons/node-path-javascript-todo-list
